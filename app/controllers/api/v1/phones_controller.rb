@@ -3,4 +3,5 @@ class Api::V1::PhonesController < ApplicationController
     @phones = Phone.all
     render json: JSON.pretty_generate(@phones.as_json)
   end
+
 end
