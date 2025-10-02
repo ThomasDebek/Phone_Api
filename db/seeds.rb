@@ -1,9 +1,14 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# db/seeds.rb
+require 'faker'
+
+Phone.destroy_all
+
+20.times do
+  Phone.create!(
+    name: "#{Faker::Device.unique.model_name} #{Faker::Number.unique.number(digits: 3)}",
+    description: Faker::Lorem.sentence(word_count: 8),
+    price: Faker::Commerce.price(range: 300.0..2500.0)
+  )
+end
+
+puts "✅ Created #{Phone.count} phones!"
